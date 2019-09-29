@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import {
-    VictoryChart, VictoryLine,
+    VictoryChart, VictoryLine, VictoryLabel,
     VictoryVoronoiContainer, VictoryAxis
 } from 'victory'
 import { fetchCurrentResults } from '../actions'
@@ -15,10 +15,11 @@ class Championship extends React.Component {
 
     computeChampionship = (results) => {
         if (!results) {
-            return {}
+            return [{}, {}]
         }
 
         let final = {}
+        let drivers = {}
 
         for (let i = 0; i < results.length; i++) {
             let race = results[i]
@@ -27,6 +28,9 @@ class Championship extends React.Component {
 
                 if (!(driver in final)) {
                     final[driver] = []
+                    drivers[driver] = {
+                        code: race.Results[j].Driver.code
+                    }
                 }
 
                 let obj = {}
@@ -41,11 +45,12 @@ class Championship extends React.Component {
             }
         }
 
-        return final
+        return [final, drivers]
     }
 
     getLines() {
-        const computed = this.computeChampionship(this.props.results.currentResults)
+        const [computed, drivers] = this.computeChampionship(this.props.results.currentResults)
+        const styles = this.getChartStyles()
         return Object.keys(computed).map(driver => {
             return (
                 <VictoryLine
@@ -54,35 +59,67 @@ class Championship extends React.Component {
                     x="round"
                     y="points"
                     style={{
-                        data: { stroke: Colors[Teams[driver]], driver: driver }
+                        ...styles,
+                        data: { stroke: Colors[Teams[driver]], driver: drivers[driver]['code'] }
                     }}
                 />
             )
         })
     }
-    /*
-                    style={{ parent: { maxWidth: "50%" } }}
-    */
+
+    getChartStyles() {
+        return {
+            parent: {
+                fontFamily: "apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif"
+            },
+            title: {
+                fontFamily: "inherit"
+            },
+            labels: {
+                fontFamily: "inherit",
+                fontSize: 8
+            },
+            tickLabels: {
+                fontFamily: "inherit"
+            },
+            axisLabel: {
+                fontFamily: "inherit",
+                padding: 37
+            }
+        }
+    }
 
     getChart() {
+        const styles = this.getChartStyles()
         return (
             <VictoryChart
                 containerComponent={
                     <VictoryVoronoiContainer
                         labels={({ datum }) => {
-
                             return `${datum.style.data.driver}: ${datum.points}`
                         }}
                     />
                 }
+                style={styles}
             >
-                <VictoryAxis
-                    tickValues={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]}
-                    tickFormat={['🇦🇺', '🇧🇭', '🇨🇳', '🇦🇿', '🇪🇸', '🇲🇨', '🇨🇦', '🇫🇷', '🇦🇹', '🇬🇧', '🇩🇪', '🇭🇺', '🇧🇪', '🇮🇹']}
+                <VictoryLabel
+                    text="Driver's Championship"
+                    x={225}
+                    y={30}
+                    textAnchor="middle"
+                    style={styles.title}
                 />
                 <VictoryAxis
+
+                    style={styles}
+                    tickValues={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]}
+                    tickFormat={['🇦🇺', '🇧🇭', '🇨🇳', '🇦🇿', '🇪🇸', '🇲🇨', '🇨🇦', '🇫🇷', '🇦🇹', '🇬🇧', '🇩🇪', '🇭🇺', '🇧🇪', '🇮🇹', '🇸🇬']}
+                />
+                <VictoryAxis
+                    label="Points"
                     dependentAxis
                     tickFormat={(x) => (`${x}`)}
+                    style={styles}
                 />
                 {this.getLines()}
             </VictoryChart>
@@ -91,8 +128,14 @@ class Championship extends React.Component {
 
     render() {
         return (
-            <div className="vh-50">
-                {this.getChart()}
+            <div>
+                <div className="row">
+                    <div className="col-12">
+                        <div>
+                            {this.getChart()}
+                        </div>
+                    </div>
+                </div>
             </div>
         )
     }
