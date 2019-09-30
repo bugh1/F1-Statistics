@@ -62,6 +62,16 @@ app.get('/api/current/results', (req, res) => {
     }
 })
 
+app.get('/api/results/:season/:round', (req, res) => {
+    const url = `https://ergast.com/api/f1/${req.params.season}/${req.params.round}/results.json`
+    request({ url, json: true }, (error, response, body) => {
+        if (error) {
+            console.log("Error fetching: " + error)
+        }
+        res.send(body.MRData.RaceTable.Races[0])
+    })
+})
+
 app.get('/api/current/last/results', (req, res) => {
     if (process.env.NODE_ENV === 'production') {
         const url = 'https://ergast.com/api/f1/current/last/results.json'

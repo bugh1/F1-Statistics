@@ -5,6 +5,7 @@ import Championship from './Championship'
 import Records from './Records'
 import HomePage from './Home/HomePage'
 import Drivers from './Drivers/Drivers'
+import SingleResult from './SingleResult'
 
 const App = () => {
     return (
@@ -17,6 +18,7 @@ const App = () => {
                         <Route path="/championship" exact component={Championship} />
                         <Route path="/drivers" exact component={Drivers} />
                         <Route path="/records" component={Records} />
+                        <Route path="/results/:season/:round" component={SingleResult} />
                     </Switch>
                 </div>
             </Router>

@@ -1,5 +1,6 @@
 import {
-    FETCH_CURRENT_RESULTS
+    FETCH_CURRENT_RESULTS,
+    FETCH_RESULT
 } from './types'
 import axios from 'axios'
 
@@ -10,6 +11,17 @@ export const fetchCurrentResults = () => {
 
         dispatch({
             type: FETCH_CURRENT_RESULTS,
+            payload: response.data
+        })
+    }
+}
+
+export const fetchResult = (season, round) => {
+    return async (dispatch) => {
+        const response = await axios.get(`/api/results/${season}/${round}`)
+
+        dispatch({
+            type: FETCH_RESULT,
             payload: response.data
         })
     }
