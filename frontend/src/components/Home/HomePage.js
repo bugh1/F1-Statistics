@@ -27,10 +27,4 @@ class HomePage extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        results: state.results
-    }
-}
-
-export default connect(mapStateToProps, { fetchCurrentResults })(HomePage)
+export default connect(null, { fetchCurrentResults })(HomePage)

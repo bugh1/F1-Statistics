@@ -12,6 +12,7 @@ const Header = () => {
                 <Nav className="mr-auto" activeKey="navbar">
                     <Nav.Link as={NavLink} to="/" exact eventKey="home">Home</Nav.Link>
                     <Nav.Link as={NavLink} to="/championship" eventKey="championship">Championship</Nav.Link>
+                    <Nav.Link as={NavLink} to="/results" eventKey="results">Results</Nav.Link>
                     <Nav.Link as={NavLink} to="/records" eventKey="records">Records</Nav.Link>
                     <Nav.Link as={NavLink} to="/drivers" eventKey="drivers">Drivers</Nav.Link>
                 </Nav>

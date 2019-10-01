@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 class LastRace extends React.Component {
     renderResults() {
@@ -29,6 +30,9 @@ class LastRace extends React.Component {
                             {this.renderResults()}
                         </tbody>
                     </table>
+                    <Link to={`/results/current/last`} className="btn btn-primary">
+                        View Results
+                    </Link>
                 </div>
             </div>
         )

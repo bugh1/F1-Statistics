@@ -62,7 +62,7 @@ class ConstructorStandings extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    if (Object.keys(state.results).length === 0) {
+    if (!state.results.currentResults) {
         return {
             results: []
         }
