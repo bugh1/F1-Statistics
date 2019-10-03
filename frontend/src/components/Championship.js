@@ -5,8 +5,8 @@ import {
     VictoryVoronoiContainer, VictoryAxis
 } from 'victory'
 import { fetchCurrentResults } from '../actions'
-import Colors from './Colors'
-import Teams from './Teams'
+import Colors from '../util/Colors'
+import Teams from '../util/Teams'
 
 class Championship extends React.Component {
     componentDidMount() {

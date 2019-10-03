@@ -44,7 +44,7 @@ class SingleResult extends React.Component {
                                 <th scope="col">Driver</th>
                                 <th scope="col">Constructor</th>
                                 <th scope="col">Laps</th>
-                                <th scope="col">Time</th>
+                                <th scope="col">Time/Status</th>
                                 <th scope="col">Points</th>
                             </tr>
                         </thead>

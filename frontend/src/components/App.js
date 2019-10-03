@@ -5,7 +5,7 @@ import Championship from './Championship'
 import Records from './Records'
 import HomePage from './Home/HomePage'
 import Drivers from './Drivers/Drivers'
-import Results from './Results'
+import Results from './Results/Results'
 import SingleResult from './SingleResult'
 
 const App = () => {
