@@ -5,43 +5,16 @@ const request = require('request')
 
 const app = express()
 
-// app.get('/api/current/driverStandings', (req, res) => {
-//     if (process.env.NODE_ENV === 'production') {
-//         const url = 'https://ergast.com/api/f1/current/driverStandings.json'
-//         request({ url, json: true }, (error, response, body) => {
-//             if (error) {
-//                 console.log("Error fetching: " + error)
-//             }
-//             res.send(body.MRData.StandingsTable.StandingsLists)
-//         })
-//     } else {
-//         fs.readFile("./cache/current.driverStandings.json", (err, data) => {
-//             if (err) {
-//                 console.log("unable to read next")
-//             }
-//             res.send(JSON.parse(data))
-//         })
-//     }
-// })
-
-// app.get('/api/current/constructorStandings', (req, res) => {
-//     if (process.env.NODE_ENV === 'production') {
-//         const url = 'https://ergast.com/api/f1/current/constructorStandings.json'
-//         request({ url, json: true }, (error, response, body) => {
-//             if (error) {
-//                 console.log("Error fetching: " + error)
-//             }
-//             res.send(body.MRData.StandingsTable.StandingsLists)
-//         })
-//     } else {
-//         fs.readFile("./cache/current.constructorStandings.json", (err, data) => {
-//             if (err) {
-//                 console.log("unable to read next")
-//             }
-//             res.send(JSON.parse(data))
-//         })
-//     }
-// })
+app.get('/api/current', (req, res) => {
+    const url = 'https://ergast.com/api/f1/current.json'
+    request({ url, json: true }, (error, response, body) => {
+        if (error) {
+            console.log("Error fetching: " + error)
+        }
+        console.log(body.MRData.RaceTable)
+        res.send(body.MRData.RaceTable)
+    })
+})
 
 app.get('/api/current/results', (req, res) => {
     if (process.env.NODE_ENV === 'production') {

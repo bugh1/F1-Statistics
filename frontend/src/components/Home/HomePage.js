@@ -5,6 +5,7 @@ import LastRace from './LastRace'
 import NextRace from './NextRace'
 import DriverStandings from './DriverStandings'
 import ConstructorStandings from './ConstructorStandings'
+import RaceCalendar from './RaceCalendar'
 
 class HomePage extends React.Component {
     componentDidMount() {
@@ -21,6 +22,9 @@ class HomePage extends React.Component {
                 <div className="card-deck pt-3">
                     <DriverStandings />
                     <ConstructorStandings />
+                </div>
+                <div className="card-deck pt-3">
+                    <RaceCalendar />
                 </div>
             </div>
         )
