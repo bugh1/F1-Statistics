@@ -11,7 +11,6 @@ app.get('/api/current', (req, res) => {
         if (error) {
             console.log("Error fetching: " + error)
         }
-        console.log(body.MRData.RaceTable)
         res.send(body.MRData.RaceTable)
     })
 })

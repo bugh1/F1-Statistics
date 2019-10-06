@@ -1,12 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { fetchResult } from '../actions'
-import Flags from '../util/Flags'
+import { fetchResult } from '../../actions'
+import Flags from '../../util/Flags'
 
-class SingleResult extends React.Component {
+class Result extends React.Component {
     componentDidMount() {
-        const { season, round } = this.props.match.params
-        this.props.fetchResult(season, round)
+        // const { season, round } = this.props.match.params
+        // this.props.fetchResult(season, round)
     }
 
     renderResultsTable(results) {
@@ -28,7 +28,7 @@ class SingleResult extends React.Component {
 
     render() {
         if (!this.props.results) {
-            return <div>Loading...</div>
+            return <div>Select a race above</div>
         }
 
         return (
@@ -62,10 +62,10 @@ class SingleResult extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        season: ownProps.match.params.season,
-        round: ownProps.match.params.round,
+        // season: state.results.query.season,
+        // round: state.results.query.round,
         results: state.results.singleResult
     }
 }
 
-export default connect(mapStateToProps, { fetchResult })(SingleResult)
+export default connect(mapStateToProps, { fetchResult })(Result)

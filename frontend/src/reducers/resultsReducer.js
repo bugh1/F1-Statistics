@@ -1,6 +1,7 @@
 import {
     FETCH_CURRENT_RESULTS,
-    FETCH_RESULT
+    FETCH_RESULT,
+    SET_SINGLE_RESULT
 } from '../actions/types'
 
 export default (state = {}, action) => {
@@ -15,6 +16,14 @@ export default (state = {}, action) => {
             return {
                 ...state,
                 singleResult: action.payload
+            }
+        case SET_SINGLE_RESULT:
+            return {
+                ...state,
+                query: {
+                    season: action.payload.season,
+                    round: action.payload.round
+                }
             }
         default:
             return state

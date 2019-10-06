@@ -2,6 +2,8 @@ const flags = {
     American: '🇺🇸',
     Australian: '🇦🇺',
     Austrian: '🇦🇹',
+    Belgian: '🇧🇪',
+    Brazilian: '🇧🇷',
     British: '🇬🇧',
     Canadian: '🇨🇦',
     Danish: '🇩🇰',
@@ -15,6 +17,7 @@ const flags = {
     Polish: '🇵🇱',
     Russian: '🇷🇺',
     Spanish: '🇪🇸',
+    Swedish: '🇸🇪',
     Thai: '🇹🇭'
 }
 
