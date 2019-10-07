@@ -1,24 +1,32 @@
 const flags = {
     American: '🇺🇸',
+    Argentine: '🇦🇷',
     Australian: '🇦🇺',
     Austrian: '🇦🇹',
     Belgian: '🇧🇪',
     Brazilian: '🇧🇷',
     British: '🇬🇧',
     Canadian: '🇨🇦',
+    Colombian: '🇨🇴',
     Danish: '🇩🇰',
     Dutch: '🇳🇱',
     Finnish: '🇫🇮',
     French: '🇫🇷',
     German: '🇩🇪',
+    Indian: '🇮🇳',
+    Irish: '🇮🇪',
     Italian: '🇮🇹',
+    Japanese: '🇯🇵',
     Mexican: '🇲🇽',
     Monegasque: '🇲🇨',
     Polish: '🇵🇱',
+    Portuguese: '🇵🇹',
     Russian: '🇷🇺',
     Spanish: '🇪🇸',
     Swedish: '🇸🇪',
-    Thai: '🇹🇭'
+    Swiss: '🇨🇭',
+    Thai: '🇹🇭',
+    Venezuelan: '🇻🇪'
 }
 
 export default flags

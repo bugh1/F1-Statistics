@@ -6,13 +6,22 @@ const request = require('request')
 const app = express()
 
 app.get('/api/current', (req, res) => {
-    const url = 'https://ergast.com/api/f1/current.json'
-    request({ url, json: true }, (error, response, body) => {
-        if (error) {
-            console.log("Error fetching: " + error)
-        }
-        res.send(body.MRData.RaceTable)
-    })
+    if (process.env.NODE_ENV === 'production') {
+        const url = 'https://ergast.com/api/f1/current.json'
+        request({ url, json: true }, (error, response, body) => {
+            if (error) {
+                console.log("Error fetching: " + error)
+            }
+            res.send(body.MRData.RaceTable)
+        })
+    } else {
+        fs.readFile("./cache/current.json", (err, data) => {
+            if (err) {
+                console.log("unable to read race calendar")
+            }
+            res.send(JSON.parse(data))
+        })
+    }
 })
 
 app.get('/api/current/results', (req, res) => {
@@ -41,6 +50,16 @@ app.get('/api/results/:season/:round', (req, res) => {
             console.log("Error fetching: " + error)
         }
         res.send(body.MRData.RaceTable.Races[0])
+    })
+})
+
+app.get('/api/calendar/:season', (req, res) => {
+    const url = `https://ergast.com/api/f1/${req.params.season}.json`
+    request({ url, json: true }, (error, response, body) => {
+        if (error) {
+            console.log("Error fetching: " + error)
+        }
+        res.send(body.MRData.RaceTable)
     })
 })
 

@@ -1,7 +1,6 @@
 import {
     FETCH_CURRENT_RESULTS,
-    FETCH_RESULT,
-    SET_SINGLE_RESULT
+    FETCH_RESULT
 } from './types'
 import axios from 'axios'
 
@@ -25,15 +24,6 @@ export const fetchResult = (season, round) => {
         dispatch({
             type: FETCH_RESULT,
             payload: response.data
-        })
-    }
-}
-
-export const setSingleResult = (season, round) => {
-    return (dispatch) => {
-        dispatch({
-            type: SET_SINGLE_RESULT,
-            payload: { season, round }
         })
     }
 }

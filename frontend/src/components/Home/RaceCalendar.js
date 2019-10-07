@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 
 class RaceCalendar extends React.Component {
@@ -22,7 +23,9 @@ class RaceCalendar extends React.Component {
             return (
                 <tr key={obj.round}>
                     <th scope="row">{obj.round}</th>
-                    <td>{obj.raceName}</td>
+                    <td>
+                        <Link to={`/results/${obj.season}/${obj.round}`}>{obj.raceName}</Link>
+                    </td>
                     <td>{obj.date}</td>
                 </tr>
             )

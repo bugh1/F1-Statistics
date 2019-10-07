@@ -1,14 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { fetchResult } from '../../actions'
 import Flags from '../../util/Flags'
 
 class Result extends React.Component {
-    componentDidMount() {
-        // const { season, round } = this.props.match.params
-        // this.props.fetchResult(season, round)
-    }
-
     renderResultsTable(results) {
         return results.map(obj => {
             const status = obj.status === "Finished" ? obj.Time.time : obj.status
@@ -60,12 +54,10 @@ class Result extends React.Component {
     }
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
     return {
-        // season: state.results.query.season,
-        // round: state.results.query.round,
         results: state.results.singleResult
     }
 }
 
-export default connect(mapStateToProps, { fetchResult })(Result)
+export default connect(mapStateToProps)(Result)

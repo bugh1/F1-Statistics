@@ -5,12 +5,26 @@ import { fetchResult } from '../../actions'
 import Result from './Result'
 
 class Results extends React.Component {
+    state = {
+        season: "",
+        round: ""
+    }
+
     componentDidMount() {
-        this.props.fetchResult(this.props.match.params.season, this.props.match.params.round)
+        if (this.props.match.params.season && this.props.match.params.round) {
+            this.props.fetchResult(this.props.match.params.season, this.props.match.params.round)
+        }
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.match.params.season !== prevProps.match.params.$season
+            && this.props.match.params.round !== prevProps.match.params.round) {
+            this.props.fetchResult(this.props.match.params.season, this.props.match.params.round)
+        }
     }
 
     onSubmit = ({ season, round }) => {
-        this.props.fetchResult(season, round)
+        this.props.history.push(`/results/${season}/${round}`)
     }
 
     render() {
