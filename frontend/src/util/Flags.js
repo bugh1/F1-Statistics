@@ -19,6 +19,7 @@ const flags = {
     Japanese: '🇯🇵',
     Mexican: '🇲🇽',
     Monegasque: '🇲🇨',
+    'New Zealander': '🇳🇿',
     Polish: '🇵🇱',
     Portuguese: '🇵🇹',
     Russian: '🇷🇺',

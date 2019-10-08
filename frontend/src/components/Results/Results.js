@@ -32,8 +32,7 @@ class Results extends React.Component {
             <div>
                 <ResultsForm
                     initialValues={{
-                        season: "2019",
-                        round: "16"
+                        season: "2019"
                     }}
                     onSubmit={this.onSubmit}
                 />

@@ -8,6 +8,15 @@ class ResultsForm extends React.Component {
         races: []
     }
 
+    componentDidMount() {
+        axios.get(`/api/calendar/${this.props.racesForm.values.season}`)
+            .then((response) => {
+                this.setState({
+                    races: response.data.Races
+                })
+            })
+    }
+
     onSubmit = (formValues) => {
         this.props.onSubmit(formValues)
     }
