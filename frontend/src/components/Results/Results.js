@@ -28,12 +28,17 @@ class Results extends React.Component {
     }
 
     render() {
+        const initialValues = {}
+        if (this.props.match.params.season && this.props.match.params.round) {
+            initialValues['season'] = this.props.match.params.season
+            initialValues['round'] = this.props.match.params.round
+        } else {
+            initialValues['season'] = new Date().getFullYear()
+        }
         return (
             <div>
                 <ResultsForm
-                    initialValues={{
-                        season: "2019"
-                    }}
+                    initialValues={initialValues}
                     onSubmit={this.onSubmit}
                 />
                 <div className="pt-3">
