@@ -1,7 +1,7 @@
 import React from 'react'
 import ResultsForm from './ResultsForm'
 import { connect } from 'react-redux'
-import { fetchResult } from '../../actions'
+import { fetchResult, fetchQualifyingResult } from '../../actions'
 import Result from './Result'
 
 class Results extends React.Component {
@@ -13,6 +13,7 @@ class Results extends React.Component {
     componentDidMount() {
         if (this.props.match.params.season && this.props.match.params.round) {
             this.props.fetchResult(this.props.match.params.season, this.props.match.params.round)
+            this.props.fetchQualifyingResult(this.props.match.params.season, this.props.match.params.round)
         }
     }
 
@@ -20,6 +21,7 @@ class Results extends React.Component {
         if (this.props.match.params.season !== prevProps.match.params.$season
             && this.props.match.params.round !== prevProps.match.params.round) {
             this.props.fetchResult(this.props.match.params.season, this.props.match.params.round)
+            this.props.fetchQualifyingResult(this.props.match.params.season, this.props.match.params.round)
         }
     }
 
@@ -56,4 +58,4 @@ const mapStateToProps = (state, ownProps) => {
     }
 }
 
-export default connect(mapStateToProps, { fetchResult })(Results)
+export default connect(mapStateToProps, { fetchResult, fetchQualifyingResult })(Results)

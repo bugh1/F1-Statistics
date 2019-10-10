@@ -1,6 +1,7 @@
 import {
     FETCH_CURRENT_RESULTS,
-    FETCH_RESULT
+    FETCH_RESULT,
+    FETCH_QUALIFYING_RESULT
 } from '../actions/types'
 
 export default (state = {}, action) => {
@@ -15,6 +16,11 @@ export default (state = {}, action) => {
             return {
                 ...state,
                 singleResult: action.payload
+            }
+        case FETCH_QUALIFYING_RESULT:
+            return {
+                ...state,
+                singleQualifyingResult: action.payload
             }
         default:
             return state

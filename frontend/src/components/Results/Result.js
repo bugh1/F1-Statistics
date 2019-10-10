@@ -20,6 +20,22 @@ class Result extends React.Component {
         })
     }
 
+    renderQualifyingTable(qualifying) {
+        return qualifying.map(obj => {
+            return (
+                <tr key={obj.position}>
+                    <th scope="row">{obj.position}</th>
+                    <td>{obj.Driver.permanentNumber}</td>
+                    <td>{Flags[obj.Driver.nationality]} {obj.Driver.givenName} {obj.Driver.familyName}</td>
+                    <td>{obj.Constructor.name}</td>
+                    <td>{obj.Q1}</td>
+                    <td>{obj.Q2}</td>
+                    <td>{obj.Q3}</td>
+                </tr>
+            )
+        })
+    }
+
     render() {
         if (!this.props.results) {
             return <div>Select a race above</div>
@@ -47,16 +63,34 @@ class Result extends React.Component {
                         </tbody>
                     </table>
                 </div>
-
+                <div className="table-responsive">
+                    <table className="table table-bordered table-sm">
+                        <caption style={{ captionSide: 'top' }}>Qualifying Results</caption>
+                        <thead>
+                            <tr>
+                                <th scope="col">Pos</th>
+                                <th scope="col">No</th>
+                                <th scope="col">Driver</th>
+                                <th scope="col">Constructor</th>
+                                <th scope="col">Q1</th>
+                                <th scope="col">Q2</th>
+                                <th scope="col">Q3</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {this.renderQualifyingTable(this.props.qualifying.QualifyingResults)}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         )
-
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        results: state.results.singleResult
+        results: state.results.singleResult,
+        qualifying: state.results.singleQualifyingResult
     }
 }
 
