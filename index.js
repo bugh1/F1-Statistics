@@ -111,6 +111,16 @@ app.get('/api/current/next', (req, res) => {
     }
 })
 
+app.get('/api/drivers/:season', (req, res) => {
+    const url = `https://ergast.com/api/f1/${req.params.season}/drivers.json`
+    request({ url, json: true }, (error, response, body) => {
+        if (error) {
+            console.log("Error fetching: " + error)
+        }
+        res.send(body.MRData.DriverTable)
+    })
+})
+
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, 'frontend', 'build')))
 
