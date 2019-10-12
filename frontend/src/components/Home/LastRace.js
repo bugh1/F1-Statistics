@@ -30,7 +30,7 @@ class LastRace extends React.Component {
                             {this.renderResults()}
                         </tbody>
                     </table>
-                    <Link to={`/results/current/last`} className="btn btn-primary">
+                    <Link to={`/results/${this.props.season}/${this.props.round}`} className="btn btn-primary">
                         View Results
                     </Link>
                 </div>
@@ -50,7 +50,9 @@ const mapStateToProps = (state) => {
     return {
         raceName: lastResult.raceName,
         circuitName: lastResult.Circuit.circuitName,
-        results: lastResult.Results.slice(0, 3)
+        results: lastResult.Results.slice(0, 3),
+        season: lastResult.season,
+        round: lastResult.round
     }
 }
 
