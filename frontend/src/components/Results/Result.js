@@ -37,7 +37,7 @@ class Result extends React.Component {
     }
 
     render() {
-        if (!this.props.results) {
+        if (!this.props.results || !this.props.qualifying) {
             return <div>Select a race above</div>
         }
 
