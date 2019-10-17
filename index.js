@@ -2,6 +2,10 @@ const fs = require('fs')
 const path = require('path')
 const express = require('express')
 const request = require('request')
+const mongoose = require('mongoose')
+const keys = require('./config/keys')
+
+mongoose.connect(keys.mongoURL, { useNewUrlParser: true })
 
 const app = express()
 
