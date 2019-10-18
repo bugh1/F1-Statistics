@@ -11,7 +11,7 @@ class Result extends React.Component {
                     <th scope="row">{obj.positionText}</th>
                     <td>{obj.Driver.permanentNumber}</td>
                     <td>{Flags[obj.Driver.nationality]} {obj.Driver.givenName} {obj.Driver.familyName}</td>
-                    <td>{obj.Constructor.name}</td>
+                    <td>{Flags[obj.Constructor.nationality]} {obj.Constructor.name}</td>
                     <td>{obj.laps}</td>
                     <td>{status}</td>
                     <td>{obj.points}</td>
@@ -27,7 +27,7 @@ class Result extends React.Component {
                     <th scope="row">{obj.position}</th>
                     <td>{obj.Driver.permanentNumber}</td>
                     <td>{Flags[obj.Driver.nationality]} {obj.Driver.givenName} {obj.Driver.familyName}</td>
-                    <td>{obj.Constructor.name}</td>
+                    <td>{Flags[obj.Constructor.nationality]} {obj.Constructor.name}</td>
                     <td>{obj.Q1}</td>
                     <td>{obj.Q2}</td>
                     <td>{obj.Q3}</td>
