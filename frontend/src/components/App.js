@@ -7,8 +7,6 @@ import HomePage from './Home/HomePage'
 import Drivers from './Drivers/Drivers'
 import Results from './Results/Results'
 
-//<Route path="/results/:season/:round" exact component={Results} />
-
 const App = () => {
     return (
         <div>
