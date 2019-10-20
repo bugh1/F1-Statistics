@@ -2,11 +2,13 @@ const mongoose = require('mongoose')
 
 const driverSchema = mongoose.Schema({
     driverId: String,
-    permanentNumber: String,
+    permanentNumber: Number,
     code: String,
     givenName: String,
     familyName: String,
-    dateOfBirth: Date,
+    dateOfBirth: String,
     nationality: String,
     url: String
 })
+
+module.exports = mongoose.model('Driver', driverSchema)
