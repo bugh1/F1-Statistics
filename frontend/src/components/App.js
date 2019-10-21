@@ -1,8 +1,7 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Header from './Header'
-import Championship from './Championship'
-import Records from './Records'
+import Statistics from './Statistics/Statistics'
 import HomePage from './Home/HomePage'
 import Drivers from './Drivers/Drivers'
 import Results from './Results/Results'
@@ -15,10 +14,9 @@ const App = () => {
                 <div className="container pt-3">
                     <Switch>
                         <Route path="/" exact component={HomePage} />
-                        <Route path="/championship" exact component={Championship} />
+                        <Route path="/statistics" exact component={Statistics} />
                         <Route path="/results/:season?/:round?" exact component={Results} />
                         <Route path="/drivers" exact component={Drivers} />
-                        <Route path="/records" component={Records} />
                     </Switch>
                 </div>
             </Router>
