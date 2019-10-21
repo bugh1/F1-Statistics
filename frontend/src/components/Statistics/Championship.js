@@ -48,14 +48,12 @@ class Championship extends React.Component {
     }
 
     render() {
-        console.log(this.props)
         const styles = this.getChartStyles()
         return (
             <VictoryChart
                 containerComponent={
                     <VictoryVoronoiContainer
                         labels={({ datum }) => {
-                            console.log("datum: %o", datum)
                             return `${datum.style.data.entity}: ${datum.points}`
                         }}
                     />
