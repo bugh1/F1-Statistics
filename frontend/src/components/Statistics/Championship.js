@@ -3,6 +3,7 @@ import {
     VictoryChart, VictoryLine,
     VictoryVoronoiContainer, VictoryAxis
 } from 'victory'
+import ChartStyles from '../../util/ChartStyles'
 
 class Championship extends React.Component {
     getLines() {
@@ -48,7 +49,7 @@ class Championship extends React.Component {
     }
 
     render() {
-        const styles = this.getChartStyles()
+        const styles = ChartStyles
         return (
             <VictoryChart
                 containerComponent={
@@ -59,10 +60,10 @@ class Championship extends React.Component {
                     />
                 }
                 padding={{ top: 30, bottom: 25, left: 55, right: 10 }}
+                height={200}
                 style={styles}
             >
                 <VictoryAxis
-
                     style={styles}
                     tickValues={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]}
                     tickFormat={['🇦🇺', '🇧🇭', '🇨🇳', '🇦🇿', '🇪🇸', '🇲🇨', '🇨🇦', '🇫🇷', '🇦🇹', '🇬🇧', '🇩🇪', '🇭🇺', '🇧🇪', '🇮🇹', '🇸🇬', '🇷🇺', '🇯🇵']}

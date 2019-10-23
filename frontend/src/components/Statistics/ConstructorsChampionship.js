@@ -54,7 +54,7 @@ class ConstructorsChampionship extends React.Component {
 
         return (
             <div className="card">
-                <h5 className="card-header">Driver's Championship</h5>
+                <h5 className="card-header">Constructor's Championship</h5>
                 <div className="card-body">
                     <Championship computed={computed} entities={constructors} />
                 </div>

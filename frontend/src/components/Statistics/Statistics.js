@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { fetchCurrentResults } from '../../actions'
 import DriversChampionship from './DriversChampionship'
 import ConstructorsChampionship from './ConstructorsChampionship'
+import DriverWins from './DriverWins'
+import DriverPodiums from './DriverPodiums'
 
 class Statistics extends React.Component {
     componentDidMount() {
@@ -14,9 +16,15 @@ class Statistics extends React.Component {
             <div>
                 <div className="card-deck">
                     <DriversChampionship />
+                </div>
+                <div className="card-deck pt-3">
+                    <DriverWins />
+                    <DriverPodiums />
+                </div>
+                <div className="card-deck pt-3">
                     <ConstructorsChampionship />
                 </div>
-            </div>
+            </div >
         )
     }
 }
