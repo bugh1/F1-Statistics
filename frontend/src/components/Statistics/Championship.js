@@ -1,6 +1,6 @@
 import React from 'react'
 import {
-    VictoryChart, VictoryLine,
+    VictoryChart, VictoryLine, VictoryLabel,
     VictoryVoronoiContainer, VictoryAxis
 } from 'victory'
 import ChartStyles from '../../util/ChartStyles'
@@ -8,7 +8,7 @@ import ChartStyles from '../../util/ChartStyles'
 class Championship extends React.Component {
     getLines() {
         const { computed, entities } = this.props
-        const styles = this.getChartStyles()
+        const styles = ChartStyles
 
         return Object.keys(computed).map(name => {
             return (
@@ -26,30 +26,25 @@ class Championship extends React.Component {
         })
     }
 
-    getChartStyles() {
-        return {
-            parent: {
-                fontFamily: "apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif"
-            },
-            title: {
-                fontFamily: "inherit"
-            },
-            labels: {
-                fontFamily: "inherit",
-                fontSize: 8
+    render() {
+        const styles = {
+            ...ChartStyles,
+            ticks: {
+                padding: -3
             },
             tickLabels: {
-                fontFamily: "inherit"
+                fontFamily: ChartStyles.tickLabels.fontFamily,
+                fontSize: 12
             },
-            axisLabel: {
-                fontFamily: "inherit",
-                padding: 40
-            }
+            grid: {
+                fill: "none",
+                stroke: "#ECEFF1",
+                strokeDasharray: "10, 5",
+                strokeLinecap: "round",
+                strokeLinejoin: "round"
+            },
         }
-    }
 
-    render() {
-        const styles = ChartStyles
         return (
             <VictoryChart
                 containerComponent={
@@ -59,7 +54,7 @@ class Championship extends React.Component {
                         }}
                     />
                 }
-                padding={{ top: 30, bottom: 25, left: 55, right: 10 }}
+                padding={{ top: 30, bottom: 25, left: 45, right: 10 }}
                 height={200}
                 style={styles}
             >
@@ -73,6 +68,9 @@ class Championship extends React.Component {
                     dependentAxis
                     tickFormat={(x) => (`${x}`)}
                     style={styles}
+                    axisLabelComponent={
+                        <VictoryLabel x={35} y={25} angle={0} />
+                    }
                 />
                 {this.getLines()}
             </VictoryChart>
