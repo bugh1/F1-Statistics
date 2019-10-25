@@ -1,13 +1,13 @@
 export default {
     parent: {
-        fontFamily: "apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif"
+        fontFamily: "inherit"
+        //fontFamily: "apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif"
     },
     title: {
         fontFamily: "inherit"
     },
     labels: {
-        fontFamily: "inherit",
-        fontSize: 12
+        fontFamily: "inherit"
     },
     tickLabels: {
         fontFamily: "inherit"

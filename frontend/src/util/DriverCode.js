@@ -1,0 +1,22 @@
+export default {
+    albon: "ALB",
+    bottas: "BOT",
+    gasly: "GAS",
+    giovinazzi: "GIO",
+    grosjean: "GRO",
+    hamilton: "HAM",
+    hulkenberg: "HUL",
+    kubica: "KUB",
+    kvyat: "KVY",
+    leclerc: "LEC",
+    kevin_magnussen: "MAG",
+    norris: "NOR",
+    perez: "PER",
+    raikkonen: "RAI",
+    ricciardo: "RIC",
+    russell: "RUS",
+    sainz: "SAI",
+    stroll: "STR",
+    max_verstappen: "VER",
+    vettel: "VET"
+}

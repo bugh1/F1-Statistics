@@ -5,6 +5,7 @@ import Statistics from './Statistics/Statistics'
 import HomePage from './Home/HomePage'
 import Drivers from './Drivers/Drivers'
 import Results from './Results/Results'
+import './App.css'
 
 const App = () => {
     return (

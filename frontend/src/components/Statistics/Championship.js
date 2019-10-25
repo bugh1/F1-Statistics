@@ -1,14 +1,39 @@
 import React from 'react'
 import {
     VictoryChart, VictoryLine, VictoryLabel,
-    VictoryVoronoiContainer, VictoryAxis
+    VictoryVoronoiContainer, VictoryAxis,
+    VictoryTooltip
 } from 'victory'
 import ChartStyles from '../../util/ChartStyles'
 
 class Championship extends React.Component {
+    getChartStyles() {
+        return {
+            ...ChartStyles,
+            labels: {
+                fontFamily: ChartStyles.labels.fontFamily,
+                fontSize: 8,
+                fill: "tomato"
+            },
+            ticks: {
+                padding: -3
+            },
+            tickLabels: {
+                fontFamily: ChartStyles.tickLabels.fontFamily,
+                fontSize: 12
+            },
+            grid: {
+                fill: "none",
+                stroke: "#ECEFF1",
+                strokeDasharray: "10, 5",
+                strokeLinecap: "round",
+                strokeLinejoin: "round"
+            }
+        }
+    }
     getLines() {
         const { computed, entities } = this.props
-        const styles = ChartStyles
+        const styles = this.getChartStyles()
 
         return Object.keys(computed).map(name => {
             return (
@@ -27,34 +52,20 @@ class Championship extends React.Component {
     }
 
     render() {
-        const styles = {
-            ...ChartStyles,
-            ticks: {
-                padding: -3
-            },
-            tickLabels: {
-                fontFamily: ChartStyles.tickLabels.fontFamily,
-                fontSize: 12
-            },
-            grid: {
-                fill: "none",
-                stroke: "#ECEFF1",
-                strokeDasharray: "10, 5",
-                strokeLinecap: "round",
-                strokeLinejoin: "round"
-            },
-        }
+        const styles = this.getChartStyles()
 
         return (
             <VictoryChart
                 containerComponent={
-                    <VictoryVoronoiContainer
+                    < VictoryVoronoiContainer
+                        style={styles}
                         labels={({ datum }) => {
                             return `${datum.style.data.entity}: ${datum.points}`
                         }}
+                        labelComponent={< VictoryTooltip style={styles} constrainToVisibleArea />}
                     />
                 }
-                padding={{ top: 30, bottom: 25, left: 45, right: 10 }}
+                padding={{ top: 30, bottom: 25, left: 45, right: 15 }}
                 height={200}
                 style={styles}
             >
@@ -73,7 +84,7 @@ class Championship extends React.Component {
                     }
                 />
                 {this.getLines()}
-            </VictoryChart>
+            </VictoryChart >
         )
     }
 }

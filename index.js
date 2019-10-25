@@ -47,6 +47,25 @@ app.get('/api/current/results', (req, res) => {
     }
 })
 
+app.get('/api/qualifying/:season', (req, res) => {
+    if (process.env.NODE_ENV !== 'production' && req.params.season === '2019') {
+        fs.readFile("./cache/current.qualifying.json", (err, data) => {
+            if (err) {
+                console.log("Unable to read current qualifying results")
+            }
+            res.send(JSON.parse(data))
+        })
+    } else {
+        const url = 'https://ergast.com/api/f1/current/qualifying.json?limit=1000'
+        request({ url, json: true }, (error, response, body) => {
+            if (error) {
+                console.log("Error fetching: " + error)
+            }
+            res.send(body.MRData.RaceTable.Races)
+        })
+    }
+})
+
 app.get('/api/results/:season/:round', (req, res) => {
     const url = `https://ergast.com/api/f1/${req.params.season}/${req.params.round}/results.json`
     request({ url, json: true }, (error, response, body) => {
