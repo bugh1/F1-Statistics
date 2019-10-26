@@ -2,7 +2,8 @@ import {
     FETCH_CURRENT_RESULTS,
     FETCH_RESULT,
     FETCH_QUALIFYING_RESULT,
-    FETCH_DRIVERS
+    FETCH_DRIVERS,
+    FETCH_QUALIFYING_RESULTS
 } from './types'
 import axios from 'axios'
 
@@ -37,6 +38,18 @@ export const fetchQualifyingResult = (season, round) => {
 
         dispatch({
             type: FETCH_QUALIFYING_RESULT,
+            payload: response.data
+        })
+    }
+}
+
+export const fetchQualifyingResults = (season) => {
+    return async (dispatch) => {
+        console.log(`fetching ${season} qualifying results`)
+        const response = await axios.get(`/api/qualifying/${season}`)
+
+        dispatch({
+            type: FETCH_QUALIFYING_RESULTS,
             payload: response.data
         })
     }

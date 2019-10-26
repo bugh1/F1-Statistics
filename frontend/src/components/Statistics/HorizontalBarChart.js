@@ -6,7 +6,6 @@ import ChartStyles from '../../util/ChartStyles'
 
 class HorizontalBarChart extends React.Component {
     render() {
-        console.log(this.props)
         return (
             <VictoryChart
                 padding={{ top: 10, bottom: 25, left: 90, right: 30 }}

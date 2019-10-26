@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { fetchCurrentResults } from '../../actions'
+import { fetchCurrentResults, fetchQualifyingResults } from '../../actions'
 import DriversChampionship from './DriversChampionship'
 import ConstructorsChampionship from './ConstructorsChampionship'
 import DriverStats from './DriverStats'
@@ -8,6 +8,7 @@ import DriverStats from './DriverStats'
 class Statistics extends React.Component {
     componentDidMount() {
         this.props.fetchCurrentResults()
+        this.props.fetchQualifyingResults(new Date().getFullYear())
     }
 
     render() {
@@ -23,4 +24,4 @@ class Statistics extends React.Component {
     }
 }
 
-export default connect(null, { fetchCurrentResults })(Statistics)
+export default connect(null, { fetchCurrentResults, fetchQualifyingResults })(Statistics)

@@ -76,6 +76,7 @@ class DriverStats extends React.Component {
 
     computeDriverPolePositions() {
         const qualifying = this.props.qualifying
+        console.log(qualifying)
     }
 
     getColor(driverId) {
