@@ -1,12 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Colors from '../../util/Colors'
-import Teams from '../../util/Teams'
-import DriverLastname from '../../util/DriverLastname'
+import Constructors from '../../util/Constructors'
 import HorizontalBarChart from './HorizontalBarChart'
 
-class DriverStats extends React.Component {
-    computeDriverWins() {
+class ConstructorStats extends React.Component {
+    computeConstructorWins() {
         if (!this.props.results) {
             return []
         }
@@ -18,7 +17,7 @@ class DriverStats extends React.Component {
             const race = results[i]
 
             if (race['Results'].length >= 1) {
-                const winner = race['Results'][0]['Driver']['driverId']
+                const winner = race['Results'][0]['Constructor']['constructorId']
 
                 if (winner in wins) {
                     wins[winner] += 1
@@ -39,7 +38,7 @@ class DriverStats extends React.Component {
         return sortable
     }
 
-    computeDriverPodiums() {
+    computeConstructorPodiums() {
         if (!this.props.results) {
             return
         }
@@ -53,12 +52,12 @@ class DriverStats extends React.Component {
             const maxVal = race['Results'].length >= 3 ? 3 : race['Results'].length
 
             for (let j = 0; j < maxVal; j++) {
-                const driver = race['Results'][j]['Driver']['driverId']
+                const constructor = race['Results'][j]['Constructor']['constructorId']
 
-                if (driver in podiums) {
-                    podiums[driver] += 1
+                if (constructor in podiums) {
+                    podiums[constructor] += 1
                 } else {
-                    podiums[driver] = 1
+                    podiums[constructor] = 1
                 }
             }
         }
@@ -79,32 +78,34 @@ class DriverStats extends React.Component {
         console.log(qualifying)
     }
 
-    getColor(driverId) {
-        return Colors[Teams[driverId]]
+    getColor(constructorId) {
+        return Colors[constructorId]
     }
 
-    getTick(driverId) {
-        return DriverLastname[driverId]
+    getTick(constructorId) {
+        return Constructors[constructorId]
     }
 
     render() {
+
+
         return (
             <div className="card-deck pt-3">
                 <div className="card">
-                    <h5 className="card-header">Driver Wins</h5>
+                    <h5 className="card-header">Constructor Wins</h5>
                     <div className="card-body">
                         <HorizontalBarChart
-                            data={this.computeDriverWins()}
+                            data={this.computeConstructorWins()}
                             getColor={this.getColor}
                             getTick={this.getTick}
                         />
                     </div>
                 </div>
                 <div className="card">
-                    <h5 className="card-header">Driver Podiums</h5>
+                    <h5 className="card-header">Constructor Podiums</h5>
                     <div className="card-body">
                         <HorizontalBarChart
-                            data={this.computeDriverPodiums()}
+                            data={this.computeConstructorPodiums()}
                             getColor={this.getColor}
                             getTick={this.getTick}
                         />
@@ -123,4 +124,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(DriverStats)
+export default connect(mapStateToProps)(ConstructorStats)
