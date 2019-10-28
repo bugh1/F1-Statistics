@@ -4,3 +4,6 @@
 # dev
 /cache
 dev.js
+
+# misc
+.DS_Store
