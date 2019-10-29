@@ -3,7 +3,7 @@ export default {
     bottas: "Bottas",
     gasly: "Gasly",
     giovinazzi: "Giovinazzi",
-    grosjean: "Groskean",
+    grosjean: "Grosjean",
     hamilton: "Hamilton",
     hulkenberg: "Hulkenberg",
     kubica: "Kubica",

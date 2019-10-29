@@ -75,8 +75,51 @@ class DriverStats extends React.Component {
     }
 
     computeDriverPolePositions() {
+        if (!this.props.qualifying) {
+            return
+        }
+
         const qualifying = this.props.qualifying
-        console.log(qualifying)
+        const pp = {}
+
+
+    }
+
+    computeDriverDNFs() {
+        if (!this.props.results) {
+            return
+        }
+
+        const results = this.props.results
+        const dnfs = {}
+
+        for (let i = 0; i < results.length; i++) {
+            const race = results[i]
+
+            for (let j = 0; j < race['Results'].length; j++) {
+                if (race['Results'][j]['status'] !== "R") {
+                    continue
+                }
+
+                const driver = race['Results'][j]['Driver']['driverId']
+
+                if (driver in dnfs) {
+                    dnfs[driver] += 1
+                } else {
+                    dnfs[driver] = 1
+                }
+            }
+        }
+
+        let sortable = []
+        for (const key in dnfs) {
+            sortable.push({
+                x: key,
+                y: dnfs[key]
+            })
+        }
+        sortable.sort((a, b) => a['y'] - b['y'])
+        return sortable
     }
 
     getColor(driverId) {
@@ -89,29 +132,52 @@ class DriverStats extends React.Component {
 
     render() {
         return (
-            <div className="card-deck pt-3">
-                <div className="card">
-                    <h5 className="card-header">Driver Wins</h5>
-                    <div className="card-body">
-                        <HorizontalBarChart
-                            data={this.computeDriverWins()}
-                            getColor={this.getColor}
-                            getTick={this.getTick}
-                        />
+            <div>
+                <div className="card-deck pt-3">
+                    <div className="card">
+                        <h5 className="card-header">Driver Wins</h5>
+                        <div className="card-body">
+                            <HorizontalBarChart
+                                data={this.computeDriverWins()}
+                                getColor={this.getColor}
+                                getTick={this.getTick}
+                            />
+                        </div>
+                    </div>
+                    <div className="card">
+                        <h5 className="card-header">Driver Podiums</h5>
+                        <div className="card-body">
+                            <HorizontalBarChart
+                                data={this.computeDriverPodiums()}
+                                getColor={this.getColor}
+                                getTick={this.getTick}
+                            />
+                        </div>
                     </div>
                 </div>
-                <div className="card">
-                    <h5 className="card-header">Driver Podiums</h5>
-                    <div className="card-body">
-                        <HorizontalBarChart
-                            data={this.computeDriverPodiums()}
-                            getColor={this.getColor}
-                            getTick={this.getTick}
-                        />
+                <div className="card-deck pt-3">
+                    <div className="card">
+                        <h5 className="card-header">Driver Pole Positions</h5>
+                        <div className="card-body">
+                            <HorizontalBarChart
+                                data={this.computeDriverPolePositions()}
+                                getColor={this.getColor}
+                                getTick={this.getTick}
+                            />
+                        </div>
+                    </div>
+                    <div className="card">
+                        <h5 className="card-header">Driver DNFs</h5>
+                        <div className="card-body">
+                            <HorizontalBarChart
+                                data={this.computeDriverDNFs()}
+                                getColor={this.getColor}
+                                getTick={this.getTick}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>
-
         )
     }
 }
