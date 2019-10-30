@@ -73,9 +73,74 @@ class ConstructorStats extends React.Component {
         return sortable
     }
 
-    computeDriverPolePositions() {
+    computeConstructorPolePositions() {
+        if (!this.props.qualifying) {
+            return
+        }
+
         const qualifying = this.props.qualifying
-        console.log(qualifying)
+        const pp = {}
+
+        for (let i = 0; i < qualifying.length; i++) {
+            const race = qualifying[i]
+
+            if (race['QualifyingResults'].length >= 1) {
+                const constructor = race['QualifyingResults'][0]['Constructor']['constructorId']
+
+                if (constructor in pp) {
+                    pp[constructor] += 1
+                } else {
+                    pp[constructor] = 1
+                }
+            }
+        }
+
+        let sortable = []
+        for (const key in pp) {
+            sortable.push({
+                x: key,
+                y: pp[key]
+            })
+        }
+        sortable.sort((a, b) => a['y'] - b['y'])
+        return sortable
+    }
+
+    computeConstructorDNFs() {
+        if (!this.props.results) {
+            return
+        }
+
+        const results = this.props.results
+        const dnfs = {}
+
+        for (let i = 0; i < results.length; i++) {
+            const race = results[i]
+
+            for (let j = 0; j < race['Results'].length; j++) {
+                if (race['Results'][j]['positionText'] !== "R") {
+                    continue
+                }
+
+                const constructor = race['Results'][j]['Constructor']['constructorId']
+
+                if (constructor in dnfs) {
+                    dnfs[constructor] += 1
+                } else {
+                    dnfs[constructor] = 1
+                }
+            }
+        }
+
+        let sortable = []
+        for (const key in dnfs) {
+            sortable.push({
+                x: key,
+                y: dnfs[key]
+            })
+        }
+        sortable.sort((a, b) => a['y'] - b['y'])
+        return sortable
     }
 
     getColor(constructorId) {
@@ -87,32 +152,53 @@ class ConstructorStats extends React.Component {
     }
 
     render() {
-
-
         return (
-            <div className="card-deck pt-3">
-                <div className="card">
-                    <h5 className="card-header">Constructor Wins</h5>
-                    <div className="card-body">
-                        <HorizontalBarChart
-                            data={this.computeConstructorWins()}
-                            getColor={this.getColor}
-                            getTick={this.getTick}
-                        />
+            <div>
+                <div className="card-deck pt-3">
+                    <div className="card">
+                        <h5 className="card-header">Constructor Wins</h5>
+                        <div className="card-body">
+                            <HorizontalBarChart
+                                data={this.computeConstructorWins()}
+                                getColor={this.getColor}
+                                getTick={this.getTick}
+                            />
+                        </div>
+                    </div>
+                    <div className="card">
+                        <h5 className="card-header">Constructor Podiums</h5>
+                        <div className="card-body">
+                            <HorizontalBarChart
+                                data={this.computeConstructorPodiums()}
+                                getColor={this.getColor}
+                                getTick={this.getTick}
+                            />
+                        </div>
                     </div>
                 </div>
-                <div className="card">
-                    <h5 className="card-header">Constructor Podiums</h5>
-                    <div className="card-body">
-                        <HorizontalBarChart
-                            data={this.computeConstructorPodiums()}
-                            getColor={this.getColor}
-                            getTick={this.getTick}
-                        />
+                <div className="card-deck pt-3">
+                    <div className="card">
+                        <h5 className="card-header">Constructor Pole Positions</h5>
+                        <div className="card-body">
+                            <HorizontalBarChart
+                                data={this.computeConstructorPolePositions()}
+                                getColor={this.getColor}
+                                getTick={this.getTick}
+                            />
+                        </div>
+                    </div>
+                    <div className="card">
+                        <h5 className="card-header">Constructor DNFs</h5>
+                        <div className="card-body">
+                            <HorizontalBarChart
+                                data={this.computeConstructorDNFs()}
+                                getColor={this.getColor}
+                                getTick={this.getTick}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>
-
         )
     }
 }

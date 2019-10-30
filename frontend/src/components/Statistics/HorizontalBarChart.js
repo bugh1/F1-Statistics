@@ -8,7 +8,7 @@ class HorizontalBarChart extends React.Component {
     render() {
         return (
             <VictoryChart
-                padding={{ top: 10, bottom: 25, left: 90, right: 30 }}
+                padding={{ top: 10, bottom: 25, left: 100, right: 30 }}
                 domainPadding={20}
                 style={ChartStyles}
             >

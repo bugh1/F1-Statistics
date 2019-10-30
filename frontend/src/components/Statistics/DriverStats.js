@@ -82,7 +82,29 @@ class DriverStats extends React.Component {
         const qualifying = this.props.qualifying
         const pp = {}
 
+        for (let i = 0; i < qualifying.length; i++) {
+            const race = qualifying[i]
 
+            if (race['QualifyingResults'].length >= 1) {
+                const driver = race['QualifyingResults'][0]['Driver']['driverId']
+
+                if (driver in pp) {
+                    pp[driver] += 1
+                } else {
+                    pp[driver] = 1
+                }
+            }
+        }
+
+        let sortable = []
+        for (const key in pp) {
+            sortable.push({
+                x: key,
+                y: pp[key]
+            })
+        }
+        sortable.sort((a, b) => a['y'] - b['y'])
+        return sortable
     }
 
     computeDriverDNFs() {
@@ -97,7 +119,7 @@ class DriverStats extends React.Component {
             const race = results[i]
 
             for (let j = 0; j < race['Results'].length; j++) {
-                if (race['Results'][j]['status'] !== "R") {
+                if (race['Results'][j]['positionText'] !== "R") {
                     continue
                 }
 

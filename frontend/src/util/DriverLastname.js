@@ -15,7 +15,7 @@ export default {
     raikkonen: "Raikkonen",
     ricciardo: "Ricciardo",
     russell: "Russell",
-    sainz: "Sainze",
+    sainz: "Sainz",
     stroll: "Stroll",
     max_verstappen: "Verstappen",
     vettel: "Vettel"
