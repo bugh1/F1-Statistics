@@ -2,12 +2,21 @@ const fs = require('fs')
 const path = require('path')
 const express = require('express')
 const request = require('request')
-const mongoose = require('mongoose')
+const { Client } = require('pg')
 const keys = require('./config/keys')
-
-mongoose.connect(keys.mongoURL, { useNewUrlParser: true })
+const dbStrings = require('./scripts/dbStrings')
 
 const app = express()
+
+const pgClient = new Client({
+    connectionString: keys.postgresURL,
+    ssl: true
+})
+
+pgClient
+    .connect()
+    .then(() => console.log('Connected to database'))
+    .catch(err => console.error('Connection error: ' + err))
 
 app.get('/api/current', (req, res) => {
     if (process.env.NODE_ENV === 'production') {
