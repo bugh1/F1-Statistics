@@ -36,29 +36,39 @@ async function dropTable(client, name) {
 }
 
 async function insertInto(client, name) {
-    if (name === "insertRaces") {
-        const { Races } = JSON.parse(fs.readFileSync("../cache/current.json"))
+    if (name === "insertRacesCircuits") {
+        const files = ['../cache/2018.json', '../cache/2019.json']
 
-        for (let i = 1; i < 2; i++) {
-            const race = Races[i]
+        for (let f = 0; f < files.length; f++) {
+            const { Races } = JSON.parse(fs.readFileSync(files[f]))
 
-            const values = [
-                race.season, race.round, race.Circuit.circuitId,
-                race.raceName, race.date, race.time, race.url
-            ]
+            for (let i = 0; i < Races.length; i++) {
+                const race = Races[i]
+                const c = race['Circuit']
+                const l = c['Location']
 
-            try {
-                console.log(dbStrings[name])
-                const res = await client.query(dbStrings[name], values)
-                console.log(res.command)
-            } catch (err) {
-                console.log("Caught error: " + err)
+                let raceValues = [
+                    race.season, race.round, race.Circuit.circuitId,
+                    race.raceName, race.date, race.time, race.url
+                ]
+
+                let circuitValues = [
+                    c.circuitId, c.circuitName, l.locality, l.country,
+                    l.lat, l.long, c.url
+                ]
+
+                try {
+                    let res = await client.query(dbStrings[name], values)
+                    console.log(res.command)
+                } catch (err) {
+                    console.log("Caught error: " + err)
+                }
             }
         }
     } else if (name === "insertCircuits") {
         const { Races } = JSON.parse(fs.readFileSync("../cache/current.json"))
 
-        for (let i = 1; i < 2; i++) {
+        for (let i = 0; i < Races.length; i++) {
             const c = Races[i]['Circuit']
             const l = c['Location']
 

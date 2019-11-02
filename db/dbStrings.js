@@ -31,15 +31,29 @@ VALUES ($1, $2, $3, $4, $5, $6, $7);`
 module.exports.dropRaces = `DROP TABLE races;`
 module.exports.selectRaces = `SELECT * FROM races;`
 
-module.exports.selectCalendar = `
-SELECT ROW_TO_JSON(circuits)
-FROM circuits;
-`
-// SELECT ROW_TO_JSON((SELECT d FROM (SELECT lat, long) d)) AS data
-// FROM circuits;`
-// SELECT races.year AS season, races.round, races.url, races.name AS "raceName",
-//     races.date::TEXT, races.time,
-//     circuits.circuit_id AS circuitId, circuits.circuit_name AS circuitName
-// FROM races
-// JOIN circuits
-// ON races.circuit_id = circuits.circuit_id;`
+module.exports.selectCalendar = (year) => {
+    return `
+    SELECT JSON_AGG(JSON_BUILD_OBJECT(
+        'season', r.year,
+        'round', r.round,
+        'url', r.url,
+        'raceName', r.name,
+        'Circuits', json_build_object(
+            'circuitId', c.circuit_id,
+            'url', c.url,
+            'circuitName', c.circuit_name,
+            'Location', json_build_object(
+                'lat', c.lat,
+                'long', c.long,
+                'locality', c.location,
+                'country', c.country
+            )
+        ),
+        'date', r.date,
+        'time', r.time || UPPER('Z')
+    )) AS "Races"
+    FROM races r
+    JOIN circuits c
+    ON r.circuit_id = c.circuit_id
+    WHERE r.year = ${year};`
+}

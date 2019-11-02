@@ -4,7 +4,7 @@ const express = require('express')
 const request = require('request')
 const { Client } = require('pg')
 const keys = require('./config/keys')
-const dbStrings = require('./scripts/dbStrings')
+const dbStrings = require('./db/dbStrings')
 
 const app = express()
 
@@ -18,22 +18,15 @@ pgClient
     .then(() => console.log('Connected to database'))
     .catch(err => console.error('Connection error: ' + err))
 
-app.get('/api/current', (req, res) => {
-    if (process.env.NODE_ENV === 'production') {
-        const url = 'https://ergast.com/api/f1/current.json'
-        request({ url, json: true }, (error, response, body) => {
-            if (error) {
-                console.log("Error fetching: " + error)
-            }
-            res.send(body.MRData.RaceTable)
-        })
-    } else {
-        fs.readFile("./cache/current.json", (err, data) => {
-            if (err) {
-                console.log("unable to read race calendar")
-            }
-            res.send(JSON.parse(data))
-        })
+app.get('/api/current', async (req, res) => {
+    try {
+        const lol = dbStrings['selectCalendar'](new Date().getFullYear())
+        console.log(lol)
+        const result = await pgClient.query(lol)
+        res.send(result.rows[0])
+    } catch (err) {
+        console.log("Caught error: " + err)
+        console.log(err)
     }
 })
 
