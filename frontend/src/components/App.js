@@ -12,7 +12,7 @@ const App = () => {
         <div>
             <Router>
                 <Header />
-                <div className="container pt-3">
+                <div className="container pt-3 pb-3">
                     <Switch>
                         <Route path="/" exact component={HomePage} />
                         <Route path="/statistics" exact component={Statistics} />

@@ -31,8 +31,7 @@ VALUES ($1, $2, $3, $4, $5, $6, $7);`
 module.exports.dropRaces = `DROP TABLE races;`
 module.exports.selectRaces = `SELECT * FROM races;`
 
-module.exports.selectCalendar = (year) => {
-    return `
+module.exports.selectCalendar = `
     SELECT JSON_AGG(JSON_BUILD_OBJECT(
         'season', r.year,
         'round', r.round,
@@ -51,9 +50,8 @@ module.exports.selectCalendar = (year) => {
         ),
         'date', r.date,
         'time', r.time || UPPER('Z')
-    )) AS "Races"
+    ) ORDER BY r.round ASC) AS "Races"
     FROM races r
     JOIN circuits c
     ON r.circuit_id = c.circuit_id
-    WHERE r.year = ${year};`
-}
+    WHERE r.year = $1;`

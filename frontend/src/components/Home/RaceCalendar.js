@@ -37,8 +37,8 @@ class RaceCalendar extends React.Component {
             <div className="card">
                 <h5 className="card-header">{this.state.season} Race Calendar</h5>
                 <div className="card-body">
-                    <table className="table table-bordered table-sm">
-                        <thead>
+                    <table className="table  table-hover table-bordered table-sm">
+                        <thead className="thead-light">
                             <tr>
                                 <th scope="col">Round</th>
                                 <th scope="col">Race</th>

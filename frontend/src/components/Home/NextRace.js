@@ -28,15 +28,8 @@ class NextRace extends React.Component {
             )
         }
 
-        const utcTime = this.state.time
-        const timeRe = /(\d+):(\d+):(\d+)Z/
-        const timeMatch = timeRe.exec(utcTime)
+        const ogTime = new Date(`${this.state.date} ${this.state.time}`).toString()
 
-        const utcDate = this.state.date
-        const dateRe = /(\d+)-(\d+)-(\d+)/
-        const dateMatch = dateRe.exec(utcDate)
-
-        const localTime = new Date(`${dateMatch[2]}/${dateMatch[3]}/${dateMatch[1]} ${timeMatch[1]}:${timeMatch[2]}:${timeMatch[3]} UTC`).toString()
         return (
             <div className="card">
                 <h5 className="card-header">Next Race</h5>
@@ -45,13 +38,27 @@ class NextRace extends React.Component {
                     <h6 className="card-subtitle mb-2 text-muted">
                         {this.state.circuit.circuitName}
                     </h6>
-                    <p className="card-text mt-auto">Date: {this.state.date}</p>
-                    <p className="card-text">Time: {this.state.time}</p>
-                    <p className="card-text">LocalTime: {localTime}</p>
+                    <table className="table table-bordered table-sm">
+                        <caption style={{ captionSide: 'top' }}>Schedule</caption>
+                        <tbody>
+                            <tr>
+                                <th scope="row">Date/Time</th>
+                                <td>{ogTime}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Location</th>
+                                <td>{this.state.circuit.Location.locality}, {this.state.circuit.Location.country}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         )
     }
 }
+
+/*
+
+*/
 
 export default NextRace

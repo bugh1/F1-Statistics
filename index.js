@@ -20,13 +20,17 @@ pgClient
 
 app.get('/api/current', async (req, res) => {
     try {
-        const lol = dbStrings['selectCalendar'](new Date().getFullYear())
-        console.log(lol)
-        const result = await pgClient.query(lol)
-        res.send(result.rows[0])
+        const year = new Date().getFullYear()
+        const query = dbStrings['selectCalendar']
+        const values = [year]
+        const result = await pgClient.query(query, values)
+        res.send({
+            season: year,
+            Races: result.rows[0]['Races']
+        })
     } catch (err) {
-        console.log("Caught error: " + err)
         console.log(err)
+        res.send(err.toString())
     }
 })
 
@@ -156,4 +160,6 @@ if (process.env.NODE_ENV === 'production') {
 
 const port = process.env.PORT || 5000
 
-app.listen(port)
+app.listen(port, () => {
+    console.log(`Express listening on port ${port}`)
+})

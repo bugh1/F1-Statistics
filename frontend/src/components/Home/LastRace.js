@@ -8,8 +8,8 @@ class LastRace extends React.Component {
             return (
                 <tr key={obj.position}>
                     <th scope="row">{obj.position}</th>
-                    <th>{`${obj.Driver.givenName} ${obj.Driver.familyName}`}</th>
-                    <th>{obj.Time.time}</th>
+                    <td>{`${obj.Driver.givenName} ${obj.Driver.familyName}`}</td>
+                    <td>{obj.Time.time}</td>
                 </tr>
             )
         })

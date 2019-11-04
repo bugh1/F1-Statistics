@@ -45,9 +45,9 @@ class Result extends React.Component {
             <div>
                 <h4>{this.props.results.season} {this.props.results.raceName}</h4>
                 <div className="table-responsive">
-                    <table className="table table-bordered table-sm">
+                    <table className="table  table-hover table-bordered table-sm">
                         <caption style={{ captionSide: 'top' }}>Race Results</caption>
-                        <thead>
+                        <thead className="thead-light">
                             <tr>
                                 <th scope="col">Pos</th>
                                 <th scope="col">No</th>
@@ -66,7 +66,7 @@ class Result extends React.Component {
                 <div className="table-responsive">
                     <table className="table table-bordered table-sm">
                         <caption style={{ captionSide: 'top' }}>Qualifying Results</caption>
-                        <thead>
+                        <thead className="thead-light">
                             <tr>
                                 <th scope="col">Pos</th>
                                 <th scope="col">No</th>

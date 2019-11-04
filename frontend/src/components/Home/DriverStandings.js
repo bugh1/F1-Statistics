@@ -54,19 +54,21 @@ class DriverStandings extends React.Component {
             <div className="card">
                 <h5 className="card-header">{`${this.props.season} Driver Standings`}</h5>
                 <div className="card-body">
-                    <table className="table table-bordered table-sm">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Driver</th>
-                                <th scope="col">Constructor</th>
-                                <th scope="col">Points</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {this.renderTable(this.props.results)}
-                        </tbody>
-                    </table>
+                    <div className="table-responsive">
+                        <table className="table table-hover table-bordered table-sm">
+                            <thead className="thead-light">
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Driver</th>
+                                    <th scope="col">Constructor</th>
+                                    <th scope="col">Points</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {this.renderTable(this.props.results)}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         )
