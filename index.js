@@ -19,6 +19,7 @@ pgClient
     .catch(err => console.error('Connection error: ' + err))
 
 app.get('/api/current', async (req, res) => {
+    /*
     try {
         const year = new Date().getFullYear()
         const query = dbStrings['selectCalendar']
@@ -32,6 +33,17 @@ app.get('/api/current', async (req, res) => {
         console.log(err)
         res.send(err.toString())
     }
+    */
+    const url = 'https://ergast.com/api/f1/current.json'
+    request({ url, json: true }, (error, response, body) => {
+        if (error) {
+            console.log("Error fetching race calendar: " + error)
+        }
+        res.send({
+            season: body.MRData.season,
+            Races: body.MRData.RaceTable.Races
+        })
+    })
 })
 
 app.get('/api/current/results', (req, res) => {
